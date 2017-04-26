@@ -26,6 +26,7 @@ import net.baba.repository.BoyRepository;
 @RestController
 public class BoyController {
 	
+	
 	@Autowired
 	private BoyRepository boyRepository;
 	/**
