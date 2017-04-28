@@ -3,7 +3,7 @@ spring:
     active: dev
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/dbboy
+    url: jdbc:mysql://127.0.0.1:3306/dbboy?useSSL=false
     username: root
     password: root
   jpa:

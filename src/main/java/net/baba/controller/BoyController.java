@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,8 +16,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import net.baba.aspect.BoyAspect;
+import net.baba.aspect.utils.ResultUtil;
 import net.baba.domain.Boy;
+import net.baba.domain.Result;
 import net.baba.repository.BoyRepository;
+import net.baba.service.BoyService;
 
 /**
  * 
@@ -26,9 +32,12 @@ import net.baba.repository.BoyRepository;
 @RestController
 public class BoyController {
 	
+	private final static Logger logger = LoggerFactory.getLogger(BoyController.class);
 	
 	@Autowired
 	private BoyRepository boyRepository;
+	@Autowired
+	private BoyService boyService;
 	/**
 	 * 查询所有男孩列表
 	 * @return
@@ -55,6 +64,7 @@ public class BoyController {
 		}
 		return boyRepository.save(boy);
 	}
+	
 	
 	/**
 	 * 查询一个男生
@@ -106,9 +116,19 @@ public class BoyController {
 	 * @return
 	 * @author 乔凯华 2017年4月25日 下午5:14:14
 	 * @version 1.0
+	 * @throws Exception 
 	 */
 	@GetMapping(value = "/boys/age/{age}")
-	public List<Boy> boyListByAge(@PathVariable("age") Integer age){
-		return boyRepository.findByAge(age);
+	public List<Boy> boyListByAge(@PathVariable("age") Integer age) throws Exception{
+		//return boyRepository.findByAge(age);
+		return boyService.findBoyListByAge(age);
 	}
+	
+	@GetMapping(value = "/aspect")
+	public String testAspect(){
+		logger.info("方法执行中...");
+		return "方法执行中...";
+	}
+	
+	
 }
