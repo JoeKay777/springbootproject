@@ -26,7 +26,7 @@ public class ExceptionHandle {
 	public Result handle(Exception e) {
 		if (e instanceof BoyException) {
 			BoyException boyException = (BoyException) e;
-			return ResultUtil.error(((BoyException) e).getCode(), ((BoyException) e).getMsg());
+			return ResultUtil.error(((BoyException) e).getCode(), ((BoyException) e).getMessage());
 		} else {
 			logger.error("【系统错误】{}", e);
 			return ResultUtil.error(-1, "系统错误");
